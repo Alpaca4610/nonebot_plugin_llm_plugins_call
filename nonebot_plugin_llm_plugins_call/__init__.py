@@ -149,9 +149,9 @@ async def do_something():
 
 
 async def to_me_rule(event: GroupMessageEvent) -> bool:
-    if event.message_seq is None:
-        return False
-    return True
+    if not hasattr(event, "message_seq"):
+        return True
+    return event.message_seq is not None
 
 
 to_me_reply = on_command(
